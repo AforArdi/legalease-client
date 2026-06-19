@@ -6,9 +6,13 @@ import { Form, Input, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 export default function RegisterPage() {
     const router = useRouter();
+    const [isVisible, setIsVisible] = useState(false);
+    const [isConfirmVisible, setIsConfirmVisible] = useState(false);
 
     const {
         register,
@@ -70,7 +74,7 @@ export default function RegisterPage() {
                                 placeholder="Jane Doe"
                                 variant="bordered"
                                 radius="none"
-                                classnames={{
+                                className={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
                                 }}
                             />
@@ -91,7 +95,7 @@ export default function RegisterPage() {
                                 placeholder="jane@example.com"
                                 variant="bordered"
                                 radius="none"
-                                classnames={{
+                                className={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
                                 }}
                             />
@@ -100,40 +104,52 @@ export default function RegisterPage() {
 
                         <div className="flex flex-col gap-1 w-full">
                             <label className="text-xs font-semibold tracking-widest text-gray-500 uppercase">Password</label>
-                            <Input
-                                {...register("password", {
-                                    required: "Password is required",
-                                    minLength: {
-                                        value: 8,
-                                        message: "Password must have at least 8 characters"
-                                    }
-                                })}
-                                type="password"
-                                placeholder="••••••••"
-                                variant="bordered"
-                                radius="none"
-                                classnames={{
-                                    inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
-                                }}
-                            />
+                            <div className="relative flex w-full">
+                                <Input
+                                    className="w-full"
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        minLength: {
+                                            value: 8,
+                                            message: "Password must have at least 8 characters"
+                                        }
+                                    })}
+                                    type={isVisible ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    variant="bordered"
+                                    radius="none"
+                                    classNames={{
+                                        inputWrapper: "border-gray-300 bg-white shadow-none rounded-none pr-10 w-full",
+                                    }}
+                                />
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 z-10 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors" onClick={() => setIsVisible(!isVisible)}>
+                                    {isVisible ? <FaRegEye size={20} /> : <FaRegEyeSlash size={20} />}
+                                </span>
+                            </div>
                             {errors.password && <span className="text-red-500">{errors.password.message}</span>}
                         </div>
 
                         <div className="flex flex-col gap-1 w-full">
                             <label className="text-xs font-semibold tracking-widest text-gray-500 uppercase">Confirm Password</label>
-                            <Input
-                                {...register("confirmPassword", {
-                                    required: "Please confirm your password",
-                                    validate: value => value === password || "The passwords do not match"
-                                })}
-                                type="password"
-                                placeholder="••••••••"
-                                variant="bordered"
-                                radius="none"
-                                classnames={{
-                                    inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
-                                }}
-                            />
+                            <div className="relative flex w-full">
+                                <Input
+                                    className="w-full"
+                                    {...register("confirmPassword", {
+                                        required: "Please confirm your password",
+                                        validate: value => value === password || "The passwords do not match"
+                                    })}
+                                    type={isConfirmVisible ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    variant="bordered"
+                                    radius="none"
+                                    classNames={{
+                                        inputWrapper: "border-gray-300 bg-white shadow-none rounded-none pr-10 w-full",
+                                    }}
+                                />
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 z-10 cursor-pointer text-gray-500 hover:text-gray-800 transition-colors" onClick={() => setIsConfirmVisible(!isConfirmVisible)}>
+                                    {isConfirmVisible ? <FaRegEye size={20} /> : <FaRegEyeSlash size={20} />}
+                                </span>
+                            </div>
                             {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
                         </div>
 
@@ -146,7 +162,7 @@ export default function RegisterPage() {
                                 accept="image/*"
                                 variant="bordered"
                                 radius="none"
-                                classnames={{
+                                className={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none h-12 pt-1",
                                     input: "file:mr-4 file:py-1 file:px-3 file:rounded-sm file:border-0 file:text-xs file:font-semibold file:bg-[#EAECE8] file:text-[#0A2519] hover:file:bg-[#D4D8CF] cursor-pointer"
                                 }}
