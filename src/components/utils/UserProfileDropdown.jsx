@@ -3,13 +3,12 @@ import { Avatar, Dropdown, Label } from "@heroui/react";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import { getUserSession } from "@/lib/api/getUserSession";
 
 const UserProfileDropdown = ({ user }) => {
-    const handleSignOut = async () => {
+    const handleLogout = async () => {
         await authClient.signOut();
         toast.error("You've been logged out")
-        redirect('/');
+        redirect('/auth/login');
     }
     const { name, role, email, image } = user;
 
@@ -41,7 +40,7 @@ const UserProfileDropdown = ({ user }) => {
                     </div>
                 </div>
                 <Dropdown.Menu aria-label="User Actions">
-                    <Dropdown.Item href="/dashboard" id="dashboard" textValue="Dashboard">
+                    <Dropdown.Item href={`/dashboard/${user.role}`} id="dashboard" textValue="Dashboard">
                         <div className="flex w-full items-center justify-between gap-2">
                             <Label className="cursor-pointer">Dashboard</Label>
                             <LayoutHeader className="size-3.5 text-muted" />
@@ -53,7 +52,7 @@ const UserProfileDropdown = ({ user }) => {
                             <Person className="size-3.5 text-muted" />
                         </div>
                     </Dropdown.Item>
-                    <Dropdown.Item onPress={handleSignOut} id="logout" textValue="Logout" variant="danger">
+                    <Dropdown.Item onPress={handleLogout} id="logout" textValue="Logout" variant="danger">
                         <div className="flex w-full items-center justify-between gap-2">
                             <Label className="cursor-pointer text-danger">Log Out</Label>
                             <ArrowRightFromSquare className="size-3.5 text-danger" />

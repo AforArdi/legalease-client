@@ -32,6 +32,7 @@ export default function RoleSelectionPage() {
       if (response.message === "Role updated successfully") {
         toast.success(`Successfully registered as a ${selectedRole}!`);
         // Redirect to dashboard or home page
+        router.refresh();
         router.push("/");
       } else {
         toast.error(response.message || "Failed to update role");
@@ -53,7 +54,7 @@ export default function RoleSelectionPage() {
 
       <div className="flex md:flex-row flex-col gap-8 px-4">
         <RoleCard
-          value="client"
+          value="user"
           selectedValue={selectedRole}
           onSelect={setSelectedRole}
           description="I am looking for legal counsel and expert representation. Access a curated registry of vetted professionals and manage your case dossiers."
