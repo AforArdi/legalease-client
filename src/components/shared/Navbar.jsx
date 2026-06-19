@@ -4,10 +4,14 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Link, Button, Avatar, Dropdown, Label } from "@heroui/react";
 import UserProfileDropdown from "../utils/UserProfileDropdown";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+    const { data: session, isPending, error, } = authClient.useSession();
+    const user = session?.user;
+    // console.log(user);
 
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
@@ -43,13 +47,18 @@ const Navbar = () => {
 
                 {/* Right Side: Auth & Profile (Desktop) */}
                 <div className="hidden md:flex items-center gap-4">
-                    <Link href="/auth/login">
-                        <Button variant="ghost">Login</Button>
-                    </Link>
-                    <Link href="/auth/register">
-                        <Button color="primary">Get Started</Button>
-                    </Link>
-                    <UserProfileDropdown />
+                    {!session ? (
+                        <>
+                            <Link href="/auth/login">
+                                <Button variant="ghost">Login</Button>
+                            </Link>
+                            <Link href="/auth/register">
+                                <Button color="primary">Get Started</Button>
+                            </Link>
+                        </>
+                    ) : (
+                        <UserProfileDropdown user={user} />
+                    )}
                 </div>
 
                 {/* Mobile Menu Toggle (Hamburger) */}
@@ -94,19 +103,21 @@ const Navbar = () => {
 
                     <div className="h-px w-full bg-separator my-2"></div>
 
-                    <div className="flex flex-col gap-4">
-                        <Link href="/auth/login" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                            <Button variant="ghost" className="w-full justify-start">Login</Button>
-                        </Link>
-                        <Link href="/auth/register" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                            <Button color="primary" className="w-full justify-start">Get Started</Button>
-                        </Link>
-                    </div>
-
-                    <div className="mt-2 flex items-center justify-between">
-                        <span className="font-medium text-foreground">Profile</span>
-                        <UserProfileDropdown />
-                    </div>
+                    {!session ? (
+                        <div className="flex flex-col gap-4">
+                            <Link href="/auth/login" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Button variant="ghost" className="w-full justify-start">Login</Button>
+                            </Link>
+                            <Link href="/auth/register" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                                <Button color="primary" className="w-full justify-start">Get Started</Button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="mt-2 flex items-center justify-between">
+                            <span className="font-medium text-foreground">Profile</span>
+                            <UserProfileDropdown user={user} />
+                        </div>
+                    )}
                 </div>
             )}
         </nav>

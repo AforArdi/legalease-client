@@ -1,14 +1,25 @@
 import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
+import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { getUserSession } from "@/lib/api/getUserSession";
 
-const UserProfileDropdown = () => {
+const UserProfileDropdown = ({ user }) => {
+    const handleSignOut = async () => {
+        await authClient.signOut();
+        toast.error("You've been logged out")
+        redirect('/');
+    }
+    const { name, role, email, image } = user;
+
     return (
         <Dropdown>
             <Dropdown.Trigger className="rounded-full cursor-pointer hover:opacity-80 transition-opacity">
                 <Avatar>
                     <Avatar.Image
                         alt="User Profile"
-                        src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
+                        src={image}
                     />
                     <Avatar.Fallback delayMs={600}>U</Avatar.Fallback>
                 </Avatar>
@@ -19,13 +30,13 @@ const UserProfileDropdown = () => {
                         <Avatar size="sm">
                             <Avatar.Image
                                 alt="User Profile"
-                                src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/avatars/orange.jpg"
+                                src={image}
                             />
                             <Avatar.Fallback delayMs={600}>U</Avatar.Fallback>
                         </Avatar>
                         <div className="flex flex-col gap-0">
-                            <p className="text-sm leading-5 font-medium">User</p>
-                            <p className="text-xs leading-none text-muted">user@example.com</p>
+                            <p className="text-sm leading-5 font-medium">{name} ({role})</p>
+                            <p className="text-xs leading-none text-muted">{email}</p>
                         </div>
                     </div>
                 </div>
@@ -39,7 +50,7 @@ const UserProfileDropdown = () => {
                             <Gear className="size-3.5 text-muted" />
                         </div>
                     </Dropdown.Item>
-                    <Dropdown.Item id="logout" textValue="Logout" variant="danger">
+                    <Dropdown.Item onPress={handleSignOut} id="logout" textValue="Logout" variant="danger">
                         <div className="flex w-full items-center justify-between gap-2">
                             <Label>Log Out</Label>
                             <ArrowRightFromSquare className="size-3.5 text-danger" />
