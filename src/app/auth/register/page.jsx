@@ -30,12 +30,13 @@ export default function RegisterPage() {
         const { fullName, email, confirmPassword } = data;
 
         const userImage = await uploadImgbb(data.image[0]);
+        // console.log(userImage.url);
 
         const { data: res, error } = await authClient.signUp.email({
             name: fullName, // required
             email: email, // required
             password: confirmPassword, // required
-            image: userImage?.url,
+            image: userImage.url,
         });
 
         if (res) {
@@ -43,7 +44,10 @@ export default function RegisterPage() {
             router.push('/choose-role');
         }
         if (error) {
-            toast.error(`${error.message}`);
+            console.error("Registration Error Details:", error);
+            // Better-auth might return error inside error.error or as statusText
+            const errorMessage = error.message || error?.error?.message || error.statusText || (typeof error === 'string' ? error : "Registration failed");
+            toast.error(errorMessage);
         }
     };
 
