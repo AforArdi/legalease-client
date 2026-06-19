@@ -1,4 +1,4 @@
-import { ArrowRightFromSquare, Gear } from "@gravity-ui/icons";
+import { ArrowRightFromSquare, LayoutHeader, Person } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import toast from "react-hot-toast";
 import { redirect } from "next/navigation";
@@ -40,19 +40,22 @@ const UserProfileDropdown = ({ user }) => {
                         </div>
                     </div>
                 </div>
-                <Dropdown.Menu>
-                    <Dropdown.Item id="profile" textValue="Profile">
-                        <Label>Profile</Label>
-                    </Dropdown.Item>
-                    <Dropdown.Item id="settings" textValue="Settings">
+                <Dropdown.Menu aria-label="User Actions">
+                    <Dropdown.Item href="/dashboard" id="dashboard" textValue="Dashboard">
                         <div className="flex w-full items-center justify-between gap-2">
-                            <Label>Settings</Label>
-                            <Gear className="size-3.5 text-muted" />
+                            <Label className="cursor-pointer">Dashboard</Label>
+                            <LayoutHeader className="size-3.5 text-muted" />
+                        </div>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="/profile" id="profile" textValue="Profile">
+                        <div className="flex w-full items-center justify-between gap-2">
+                            <Label className="cursor-pointer">Profile</Label>
+                            <Person className="size-3.5 text-muted" />
                         </div>
                     </Dropdown.Item>
                     <Dropdown.Item onPress={handleSignOut} id="logout" textValue="Logout" variant="danger">
                         <div className="flex w-full items-center justify-between gap-2">
-                            <Label>Log Out</Label>
+                            <Label className="cursor-pointer text-danger">Log Out</Label>
                             <ArrowRightFromSquare className="size-3.5 text-danger" />
                         </div>
                     </Dropdown.Item>
