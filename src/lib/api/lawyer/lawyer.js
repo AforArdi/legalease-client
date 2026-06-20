@@ -5,3 +5,6 @@ export const getLawyers = async (params = {}) => {
     const url = query ? `/lawyers?${query}` : '/lawyers';
     return await serverFetch(url);
 }
+export const getLawyerById = async (id) => {
+    return await serverFetch(`/lawyers/${id}`);
+}
