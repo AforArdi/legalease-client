@@ -15,7 +15,7 @@ export default async function DashboardLayout({ children }) {
         <div className="flex h-screen bg-background">
             <div className="flex flex-1 overflow-hidden">
                 <DashboardSlider role={user?.role}></DashboardSlider>
-                <main className="px-5">
+                <main className="flex-1 overflow-y-auto px-5 pb-10">
                     {children}
                 </main>
             </div>

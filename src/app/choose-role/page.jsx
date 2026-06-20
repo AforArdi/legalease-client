@@ -33,7 +33,7 @@ export default function RoleSelectionPage() {
         toast.success(`Successfully registered as a ${selectedRole}!`);
         // Redirect based on role
         if (selectedRole === "lawyer") {
-          router.push("/onboarding/lawyer");
+          router.push("/dashboard/lawyer/manage-legal-profile");
         } else {
           router.push("/");
           router.refresh();
