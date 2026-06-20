@@ -1,4 +1,4 @@
-import { baseUrl } from "../baseUrl";
+import { baseUrl } from "../../baseUrl";
 
 export const serverMutation = async (path, method, data) => {
     const res = await fetch(`${baseUrl}${path}`, {
@@ -7,6 +7,13 @@ export const serverMutation = async (path, method, data) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+    });
+    return res.json();
+};
+
+export const serverFetch = async (path) => {
+    const res = await fetch(`${baseUrl}${path}`, {
+        cache: 'no-store'
     });
     return res.json();
 };

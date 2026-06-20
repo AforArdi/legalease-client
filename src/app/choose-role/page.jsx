@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { RoleCard } from "@/components/utils/RoleCard";
-import { serverMutation } from "@/lib/api/server";
+import { serverMutation } from "@/lib/api/core/server";
 
 export default function RoleSelectionPage() {
   const [selectedRole, setSelectedRole] = useState("");

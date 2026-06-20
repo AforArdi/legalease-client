@@ -1,5 +1,5 @@
+import { getUserSession } from "@/lib/api/core/getUserSession";
 import { redirect } from "next/navigation";
-import { getUserSession } from "@/lib/api/getUserSession";
 
 export default async function ChooseRoleLayout({ children }) {
     const user = await getUserSession();

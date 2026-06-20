@@ -60,7 +60,7 @@ const Banner = () => {
             </Swiper>
 
             {/* Custom Styles to Override Default Swiper Arrow Colors to match standard white/grey styling */}
-            <style jsx global>{`
+            <style dangerouslySetInnerHTML={{ __html: `
                 .swiper-button-next,
                 .swiper-button-prev {
                     color: rgba(255, 255, 255, 0.8) !important;
@@ -79,7 +79,7 @@ const Banner = () => {
                 .swiper-button-prev::after {
                     font-size: 20px !important;
                 }
-            `}</style>
+            `}} />
         </div>
     );
 };

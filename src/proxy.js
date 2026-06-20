@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getUserSession } from './lib/api/getUserSession';
+import { getUserSession } from './lib/api/core/getUserSession';
 
 export async function proxy(request) {
     const { pathname } = request.nextUrl;

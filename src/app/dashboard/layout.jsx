@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { getUserSession } from "@/lib/api/getUserSession";
 import DashboardSlider from "@/components/dashboard/DashboardSlider";
+import { getUserSession } from "@/lib/api/core/getUserSession";
 
 export default async function DashboardLayout({ children }) {
     const user = await getUserSession();
