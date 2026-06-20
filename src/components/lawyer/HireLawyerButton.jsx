@@ -29,7 +29,7 @@ export default function HireLawyerButton({ lawyer, user }) {
                 createdAt: new Date().toISOString()
             };
             const response = await createHiringReq(payload);
-            
+
             if (response.message === "You have already sent a hiring request to this lawyer") {
                 toast.error(response.message);
             } else {
@@ -77,8 +77,8 @@ export default function HireLawyerButton({ lawyer, user }) {
                         </Modal.Body>
                         <Modal.Footer>
                             {canHire && (
-                                <Button 
-                                    onPress={handleHiringReq} 
+                                <Button
+                                    onPress={handleHiringReq}
                                     isLoading={isLoading}
                                     className="bg-[#0A2519] text-white"
                                 >

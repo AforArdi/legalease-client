@@ -107,7 +107,7 @@ export default function LoginPage() {
                             isLoading={isSubmitting}
                             className="w-full bg-[#A48039] hover:bg-[#8e6e30] text-white font-semibold py-6 rounded-none text-base"
                         >
-                            Access Dossier
+                            Login
                         </Button>
 
                         <div className="relative flex items-center justify-center my-2">

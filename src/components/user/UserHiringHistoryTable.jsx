@@ -3,7 +3,7 @@
 import { Button, Chip, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { geMyHiringReq } from "@/lib/api/user/user";
+import { getMyHiringReq } from "@/lib/api/user/user";
 
 const statusColorMap = {
   Pending: "warning",
@@ -19,7 +19,7 @@ export default function UserHiringHistoryTable({ sessionUser }) {
   const fetchRequests = async () => {
     try {
       if (sessionUser?.email) {
-        const data = await geMyHiringReq(sessionUser.email);
+        const data = await getMyHiringReq(sessionUser.email);
         setHiringRequests(data);
       }
     } catch (error) {
@@ -58,9 +58,15 @@ export default function UserHiringHistoryTable({ sessionUser }) {
       case "actions":
         if (request.status === "Accepted") {
           return (
-            <Button size="sm" className="bg-[#A48039] text-white font-medium hover:bg-[#8e6e30] rounded-sm px-6">
-              Pay Now
-            </Button>
+            <form action={'/api/checkout_sessions'} method="POST">
+              <input type="text" name="hiringReqId" value={request._id} readOnly hidden />
+              <input type="text" name="lawyerName" value={request.lawyerName} readOnly hidden />
+              <input type="text" name="lawyerEmail" value={request.lawyerEmail} readOnly hidden />
+              <input type="number" name="fee" value={request.fee} readOnly hidden />
+              <Button type="submit" size="sm" className="bg-[#A48039] text-white font-medium hover:bg-[#8e6e30] rounded-sm px-6">
+                Pay Now
+              </Button>
+            </form>
           );
         } else {
           return <span className="text-sm text-gray-400 italic">No action available</span>;
