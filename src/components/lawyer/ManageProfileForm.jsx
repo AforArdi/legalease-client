@@ -38,7 +38,7 @@ export default function ManageProfileForm({ initialData, sessionUser }) {
   } = useForm({
     mode: "onTouched",
     defaultValues: {
-      // sessionUser?.name ||  -> this was in fullName
+      // sessionUser?.name ||  -> this was in fullName, for later note
       fullName: initialData?.name || "",
       email: sessionUser?.email || "",
       category: initialData?.category || "",

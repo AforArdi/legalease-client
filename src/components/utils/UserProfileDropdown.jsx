@@ -46,12 +46,6 @@ const UserProfileDropdown = ({ user }) => {
                             <LayoutHeader className="size-3.5 text-muted" />
                         </div>
                     </Dropdown.Item>
-                    <Dropdown.Item href="/profile" id="profile" textValue="Profile">
-                        <div className="flex w-full items-center justify-between gap-2">
-                            <Label className="cursor-pointer">Profile</Label>
-                            <Person className="size-3.5 text-muted" />
-                        </div>
-                    </Dropdown.Item>
                     <Dropdown.Item onPress={handleLogout} id="logout" textValue="Logout" variant="danger">
                         <div className="flex w-full items-center justify-between gap-2">
                             <Label className="cursor-pointer text-danger">Log Out</Label>

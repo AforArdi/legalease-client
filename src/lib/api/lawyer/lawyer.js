@@ -11,3 +11,10 @@ export const getLawyerById = async (id) => {
 export const updateLawyerProfile = async (data) => {
     return await serverMutation('/lawyers', 'POST', data);
 }
+export const getLawyerHiringReq = async (lawyerEmail) => {
+    const query = new URLSearchParams({ lawyerEmail }).toString();
+    return await serverFetch(`/lawyer/hiring?${query}`);
+}
+export const updateHiringReqStatus = async (id, status) => {
+    return await serverMutation(`/lawyer/hiring/${id}`, 'PATCH', { status });
+}
