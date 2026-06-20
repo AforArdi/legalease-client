@@ -149,24 +149,6 @@ export default function ManageLegalProfilePage() {
               radius="none"
               classNames={{ inputWrapper: "border-gray-300 shadow-none rounded-none" }}
             />
-            <Input
-              label="Phone Number"
-              labelPlacement="outside"
-              placeholder="+1 (555) 123-4567"
-              defaultValue="+1 (555) 123-4567"
-              variant="bordered"
-              radius="none"
-              classNames={{ inputWrapper: "border-gray-300 shadow-none rounded-none" }}
-            />
-            <Input
-              label="Location (Office)"
-              labelPlacement="outside"
-              placeholder="New York, NY"
-              defaultValue="New York, NY"
-              variant="bordered"
-              radius="none"
-              classNames={{ inputWrapper: "border-gray-300 shadow-none rounded-none" }}
-            />
           </div>
 
           <h2 className="text-xl font-bold text-[#0A2519] mb-6">Professional Biography</h2>
@@ -186,14 +168,7 @@ export default function ManageLegalProfilePage() {
 
           <div className="flex justify-end items-center gap-4">
             <Button variant="light" className="font-medium text-gray-600 hover:text-[#0A2519]">Cancel</Button>
-            <Button className="bg-transparent border border-gray-300 rounded-none font-medium hover:bg-gray-50">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-                <polyline points="17 21 17 13 7 13 7 21" />
-                <polyline points="7 3 7 8 15 8" />
-              </svg>
-              Save Changes
-            </Button>
+            <Button variant="light" className="font-medium text-gray-600 hover:text-[#0A2519]">Save Changes</Button>
           </div>
         </div>
       </div>

@@ -65,7 +65,7 @@ export default function RegisterPage() {
                     <p className="mt-2 text-sm text-gray-600">Client Intake & Archival Registry</p>
                 </div>
 
-                <Form className="mt-8 space-y-6 flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
+                <form className="mt-8 space-y-6 flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-5 w-full">
                         <div className="flex flex-col gap-1 w-full">
                             <label className="text-xs font-semibold tracking-widest text-gray-500 uppercase">Full Name</label>
@@ -74,7 +74,7 @@ export default function RegisterPage() {
                                 placeholder="Jane Doe"
                                 variant="bordered"
                                 radius="none"
-                                className={{
+                                classNames={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
                                 }}
                             />
@@ -95,7 +95,7 @@ export default function RegisterPage() {
                                 placeholder="jane@example.com"
                                 variant="bordered"
                                 radius="none"
-                                className={{
+                                classNames={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none",
                                 }}
                             />
@@ -162,7 +162,7 @@ export default function RegisterPage() {
                                 accept="image/*"
                                 variant="bordered"
                                 radius="none"
-                                className={{
+                                classNames={{
                                     inputWrapper: "border-gray-300 bg-white shadow-none rounded-none h-12 pt-1",
                                     input: "file:mr-4 file:py-1 file:px-3 file:rounded-sm file:border-0 file:text-xs file:font-semibold file:bg-[#EAECE8] file:text-[#0A2519] hover:file:bg-[#D4D8CF] cursor-pointer"
                                 }}
@@ -199,7 +199,7 @@ export default function RegisterPage() {
                             Continue with Google
                         </Button>
                     </div>
-                </Form>
+                </form>
             </div>
         </div>
     );

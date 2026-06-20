@@ -1,6 +1,6 @@
 import { getLawyers } from "@/lib/api/lawyer/lawyer";
-import LawyerCard from "../utils/LawyerCard";
-import LawyerCardSkeleton from "../utils/LawyerCardSkeleton";
+import LawyerCard from "../lawyer/LawyerCard";
+import LawyerCardSkeleton from "../lawyer/LawyerCardSkeleton";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -39,7 +39,7 @@ const FeaturedLawyers = () => {
                     </p>
                 </div>
             </div>
-            
+
             <Suspense fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {[...Array(6)].map((_, i) => <LawyerCardSkeleton key={i} />)}

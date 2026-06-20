@@ -55,7 +55,7 @@ export default function LoginPage() {
                     <p className="mt-2 text-sm text-gray-600">Professional Archival Standards Applied</p>
                 </div>
 
-                <Form className="mt-8 space-y-6 flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
+                <form className="mt-8 space-y-6 flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-5 w-full">
                         <div className="flex flex-col gap-1 w-full">
                             <label className="text-xs font-semibold tracking-widest text-gray-500 uppercase">Email</label>
@@ -132,7 +132,7 @@ export default function LoginPage() {
                             Continue with Google
                         </Button>
                     </div>
-                </Form>
+                </form>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { getLawyers } from "@/lib/api/lawyer/lawyer";
-import LawyerCard from "@/components/utils/LawyerCard";
-import LawyerCardSkeleton from "@/components/utils/LawyerCardSkeleton";
+import LawyerCard from "@/components/lawyer/LawyerCard";
+import LawyerCardSkeleton from "@/components/lawyer/LawyerCardSkeleton";
 import { Suspense } from "react";
 
 const LawyersGrid = async () => {
@@ -31,7 +31,7 @@ const BrowseLawyersPage = () => {
             <h1 className="text-3xl md:text-4xl font-bold text-[#0A2519] mb-8">
                 Browse Lawyers
             </h1>
-            
+
             <Suspense fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {[...Array(8)].map((_, i) => <LawyerCardSkeleton key={i} />)}
