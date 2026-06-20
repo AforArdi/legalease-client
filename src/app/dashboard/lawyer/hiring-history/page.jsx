@@ -1,29 +1,24 @@
 "use client";
 
 import { Button, Chip, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/react";
-import { User } from "@heroui/user";
 
 const hiringRequests = [
   {
     id: "REQ-001",
     client: {
       name: "Eleanor Vance",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
     },
     date: "2023-10-24",
     fee: "$5,000.00",
-    summary: "Intellectual property dispute re...",
     status: "Pending",
   },
   {
     id: "REQ-002",
     client: {
       name: "Marcus Thorne",
-      avatar: "https://i.pravatar.cc/150?u=a04258a2462d826712d",
     },
     date: "2023-10-22",
     fee: "$12,500.00",
-    summary: "Corporate restructuring and em...",
     status: "Accepted",
     subStatus: "PAYMENT READY",
   },
@@ -31,11 +26,9 @@ const hiringRequests = [
     id: "REQ-003",
     client: {
       name: "Acme Corp Ltd.",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
     },
     date: "2023-10-18",
     fee: "$2,000.00",
-    summary: "Drafting standard NDA template...",
     status: "Declined",
   },
 ];
@@ -50,18 +43,11 @@ export default function HiringHistoryPage() {
   const renderCell = (request, columnKey) => {
     switch (columnKey) {
       case "client":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: request.client.avatar }}
-            name={request.client.name}
-          />
-        );
+        return <span className="text-sm font-medium text-[#0A2519]">{request.client.name}</span>;
       case "date":
         return <span className="text-sm text-gray-600">{request.date}</span>;
       case "fee":
         return <span className="text-sm font-medium">{request.fee}</span>;
-      case "summary":
-        return <span className="text-sm text-gray-500">{request.summary}</span>;
       case "status":
         return (
           <div className="flex flex-col gap-1 items-start">
@@ -144,7 +130,6 @@ export default function HiringHistoryPage() {
                 <Table.Column>CLIENT</Table.Column>
                 <Table.Column>DATE ISSUED</Table.Column>
                 <Table.Column>RETAINER FEE</Table.Column>
-                <Table.Column>SUMMARY</Table.Column>
                 <Table.Column>STATUS</Table.Column>
                 <Table.Column>ACTIONS</Table.Column>
               </Table.Header>
@@ -154,7 +139,6 @@ export default function HiringHistoryPage() {
                     <Table.Cell>{renderCell(item, "client")}</Table.Cell>
                     <Table.Cell>{renderCell(item, "date")}</Table.Cell>
                     <Table.Cell>{renderCell(item, "fee")}</Table.Cell>
-                    <Table.Cell>{renderCell(item, "summary")}</Table.Cell>
                     <Table.Cell>{renderCell(item, "status")}</Table.Cell>
                     <Table.Cell>{renderCell(item, "actions")}</Table.Cell>
                   </Table.Row>
@@ -162,17 +146,6 @@ export default function HiringHistoryPage() {
               </Table.Body>
             </Table.Content>
           </Table.ScrollContainer>
-          <Table.Footer>
-            <div className="flex w-full justify-between items-center px-6 py-4 bg-[#F3F5F2]">
-              <span className="text-xs text-gray-500 font-medium tracking-wide">
-                Showing 1 to 3 of 12 requests
-              </span>
-              <div className="flex gap-2 text-gray-400">
-                <button className="hover:text-[#0A2519]">&lt;</button>
-                <button className="hover:text-[#0A2519]">&gt;</button>
-              </div>
-            </div>
-          </Table.Footer>
         </Table>
       </div>
     </div>

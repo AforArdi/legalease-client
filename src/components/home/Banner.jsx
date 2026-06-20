@@ -50,7 +50,7 @@ const Banner = () => {
                                         size="lg"
                                         className="bg-[#A48039] hover:bg-[#8e6e30] text-white font-semibold px-10 py-6 tracking-wide rounded-sm transition-colors"
                                     >
-                                        FIND AN EXPERT
+                                        BROWSE LAWYERS
                                     </Button>
                                 </Link>
                             </div>
