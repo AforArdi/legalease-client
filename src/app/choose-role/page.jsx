@@ -31,9 +31,13 @@ export default function RoleSelectionPage() {
 
       if (response.message === "Role updated successfully") {
         toast.success(`Successfully registered as a ${selectedRole}!`);
-        // Redirect to dashboard or home page
-        router.refresh();
-        router.push("/");
+        // Redirect based on role
+        if (selectedRole === "lawyer") {
+          router.push("/onboarding/lawyer");
+        } else {
+          router.push("/");
+          router.refresh();
+        }
       } else {
         toast.error(response.message || "Failed to update role");
       }
