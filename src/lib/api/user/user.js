@@ -7,3 +7,10 @@ export const getMyHiringReq = async (userEmail) => {
 export const createHiringReq = async (data) => {
     return await serverMutation('/user/hiring', 'POST', data);
 }
+export const getUserByEmail = async (email) => {
+    const query = new URLSearchParams({ email }).toString();
+    return await serverFetch(`/user?${query}`);
+}
+export const updateUserProfile = async (data) => {
+    return await serverMutation('/user', 'POST', data);
+}

@@ -3,6 +3,7 @@ import { getUserSession } from "@/lib/api/core/getUserSession";
 import { getLawyers } from "@/lib/api/lawyer/lawyer";
 
 export default async function ManageLegalProfilePage() {
+
   const sessionUser = await getUserSession();
 
   const email = sessionUser?.email;

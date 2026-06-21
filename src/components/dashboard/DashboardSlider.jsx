@@ -22,6 +22,7 @@ const dashboardItems = {
     client: [
         { icon: LayoutHeader, label: "Overview", link: "/dashboard/user" },
         { icon: PersonPlus, label: "Hiring History", link: "/dashboard/user/hiring-history" },
+        { icon: PersonGear, label: "Update Profile", link: "/dashboard/user/update-profile" },
         { icon: CommentDot, label: "Comments", link: "/dashboard/user/comments" },
     ],
     admin: [
