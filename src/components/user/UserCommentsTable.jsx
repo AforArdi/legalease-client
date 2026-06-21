@@ -23,7 +23,7 @@ export default function UserCommentsTable({ userComments: initialComments }) {
     setIsDeleteModalOpen(true);
   };
 
-  const executeDelete = async () => {
+  const handleCommentDelete = async () => {
     if (!commentToDelete) return;
     setIsDeleting(true);
     try {
@@ -181,7 +181,7 @@ export default function UserCommentsTable({ userComments: initialComments }) {
                   <Button variant="light" onPress={() => setIsDeleteModalOpen(false)}>
                     Cancel
                   </Button>
-                  <Button className="bg-red-500 text-white font-medium" onPress={executeDelete} isLoading={isDeleting}>
+                  <Button className="bg-red-500 text-white font-medium" onPress={handleCommentDelete} isLoading={isDeleting}>
                     Delete
                   </Button>
                 </div>
