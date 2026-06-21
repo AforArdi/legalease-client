@@ -88,17 +88,12 @@ export default function UserHiringHistoryTable({ sessionUser }) {
       <div className="w-full relative shadow-sm border border-gray-100 rounded-lg overflow-hidden">
         <Table
           aria-label="User hiring history table"
-          classNames={{
-            wrapper: "bg-[#F3F5F2] p-0 shadow-none rounded-none min-h-[200px]",
-            th: "bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6",
-            td: "px-6 py-4 border-b border-gray-200/60",
-            table: "min-w-full",
-          }}
+          className="bg-[#F3F5F2] min-h-[200px] min-w-full rounded-none"
         >
           <Table.ScrollContainer>
             <Table.Content>
               <Table.Header>
-                <Table.Column>LAWYER</Table.Column>
+                <Table.Column isRowHeader>LAWYER</Table.Column>
                 <Table.Column>DATE SENT</Table.Column>
                 <Table.Column>FEE</Table.Column>
                 <Table.Column>STATUS</Table.Column>

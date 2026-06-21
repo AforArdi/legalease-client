@@ -1,17 +1,27 @@
 import { getLawyerById } from "@/lib/api/lawyer/lawyer";
 import { getUserSession } from "@/lib/api/core/getUserSession";
 import HireLawyerButton from "@/components/lawyer/HireLawyerButton";
+import { getLawyerComments } from "@/lib/api/comment/comment";
+import SendCommentModal from "@/components/user/SendCommentModal";
+import { getMyHiringReq } from "@/lib/api/user/user";
 
 const LawyerDetailsPage = async ({ params }) => {
     const { id: lawyerId } = await params;
     const lawyer = await getLawyerById(lawyerId);
     const user = await getUserSession();
 
+    const lawyerComments = await getLawyerComments(lawyer?.email);
+
+    let hasHired = false;
+    let hasAlreadyCommented = false;
+
+    if (user && user.role !== "lawyer") {
+        const hiringRequests = await getMyHiringReq(user.email);
+        hasHired = hiringRequests?.some(req => req.lawyerEmail === lawyer?.email);
+        hasAlreadyCommented = lawyerComments?.some(comment => comment.userEmail === user.email);
+    }
+
     // console.log(lawyer);
-
-    // const handleConsultationRequest = async () => {
-
-    // }
 
     if (!lawyer) {
         return (
@@ -76,9 +86,6 @@ const LawyerDetailsPage = async ({ params }) => {
 
                     <div className="flex flex-col gap-3">
                         <HireLawyerButton lawyer={lawyer} user={user} />
-                        <button className="w-full bg-transparent border border-[#0A2519] text-[#0A2519] font-bold py-4 rounded-none hover:bg-gray-50 transition-colors">
-                            Send Message
-                        </button>
                     </div>
                 </div>
 
@@ -110,18 +117,36 @@ const LawyerDetailsPage = async ({ params }) => {
 
                     {/* Authenticated Comments Section */}
                     <div className="mt-16">
-                        <h2 className="text-xl font-bold text-[#0A2519] mb-6">Client Reviews</h2>
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-xl font-bold text-[#0A2519]">Client Reviews</h2>
+                            {user && user?.role !== "lawyer" && hasHired && !hasAlreadyCommented && (
+                                <SendCommentModal lawyer={lawyer} user={user} />
+                            )}
+                        </div>
                         {!user ? (
                             <div className="bg-gray-50 p-6 text-center border border-gray-200">
                                 <p className="text-sm text-gray-600">Please log in to view and post reviews.</p>
                             </div>
-                        ) : user?.role === "lawyer" ? (
-                            <div className="bg-[#F3F5F2] p-6 border border-gray-100">
-                                <p className="text-sm text-gray-600 italic">As a lawyer, you are viewing these reviews in read-only mode.</p>
-                            </div>
                         ) : (
-                            <div className="bg-[#F3F5F2] p-6 border border-gray-100">
-                                <p className="text-sm text-gray-600 italic">No reviews yet. Be the first to leave a comment!</p>
+                            <div className="space-y-4">
+                                {lawyerComments && lawyerComments.length > 0 ? (
+                                    lawyerComments.map((comment) => (
+                                        <div key={comment._id} className="bg-[#F3F5F2] p-6 border border-gray-100">
+                                            <p className="text-sm font-semibold text-[#0A2519] mb-2">{comment.userEmail}</p>
+                                            <p className="text-sm text-gray-700">{comment.comment}</p>
+                                            <span className="text-xs text-gray-500 mt-4 block">
+                                                {new Date(comment.createdAt).toLocaleDateString()}
+                                            </span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="bg-[#F3F5F2] p-6 border border-gray-100">
+                                        <p className="text-sm text-gray-600 italic">No reviews yet. Be the first to leave a comment!</p>
+                                    </div>
+                                )}
+                                {user?.role === "lawyer" && (
+                                    <p className="text-sm text-gray-600 italic mt-4 text-center">As a lawyer, you are viewing these reviews in read-only mode.</p>
+                                )}
                             </div>
                         )}
                     </div>
