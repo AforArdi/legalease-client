@@ -57,6 +57,13 @@ export default function RegisterPage() {
 
     const password = watch("password", "");
 
+    const handleGoogleLogin = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+            callbackURL: "/choose-role"
+        });
+    }
+
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] py-12 px-4 sm:px-6 lg:px-8 bg-[#F9F9F9]">
             <div className="w-full max-w-md space-y-8 bg-transparent">
@@ -186,6 +193,7 @@ export default function RegisterPage() {
                         </div>
 
                         <Button
+                            onClick={handleGoogleLogin}
                             variant="bordered"
                             className="w-full bg-white border border-gray-300 text-gray-700 font-semibold py-6 rounded-none flex items-center gap-2"
                             type="button"
