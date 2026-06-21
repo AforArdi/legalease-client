@@ -13,3 +13,6 @@ export const deleteUser = async (email, role) => {
 export const getAllTransactions = async () => {
     return await serverFetch('/admin/transactions');
 }
+export const getAllLawyers = async () => {
+    return await serverFetch('/admin/lawyers');
+}
