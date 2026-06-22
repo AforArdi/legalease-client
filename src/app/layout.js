@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${frauncesFont.variable} h-full antialiased`}
+      className={`${frauncesFont.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
