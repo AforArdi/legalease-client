@@ -46,7 +46,7 @@ export default function HireLawyerButton({ lawyer, user }) {
 
     return (
         <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-            <Button onPress={() => setIsOpen(true)} className="w-full bg-[#E5C365] hover:bg-[#d4b052] text-[#0A2519] font-bold rounded-none py-6 tracking-wide shadow-sm">
+            <Button isDisabled={lawyer.status === "Busy"} onPress={() => setIsOpen(true)} className="w-full bg-[#E5C365] hover:bg-[#d4b052] text-[#0A2519] font-bold rounded-none py-6 tracking-wide shadow-sm">
                 Hire {firstName}
             </Button>
             <Modal.Backdrop>
