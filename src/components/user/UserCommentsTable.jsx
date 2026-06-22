@@ -6,6 +6,9 @@ import toast from "react-hot-toast";
 import { editComment, deleteComment } from "@/lib/api/comment/comment";
 
 export default function UserCommentsTable({ userComments: initialComments }) {
+
+  const validComments = Array.isArray(initialComments) ? initialComments : [];
+
   const [comments, setComments] = useState(initialComments || []);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -113,7 +116,7 @@ export default function UserCommentsTable({ userComments: initialComments }) {
                 <Table.Column>DATE</Table.Column>
                 <Table.Column>ACTIONS</Table.Column>
               </Table.Header>
-              <Table.Body items={comments} emptyContent="No comments found.">
+              <Table.Body items={validComments} emptyContent="No comments found.">
                 {(item) => (
                   <Table.Row key={item._id} className="hover:bg-white/40 transition-colors">
                     <Table.Cell>{renderCell(item, "lawyerName")}</Table.Cell>

@@ -124,7 +124,7 @@ export default function HiringRequestsTable({ sessionUser }) {
           <Table.ScrollContainer>
             <Table.Content>
               <Table.Header>
-                <Table.Column>CLIENT</Table.Column>
+                <Table.Column isRowHeader>CLIENT</Table.Column>
                 <Table.Column>DATE ISSUED</Table.Column>
                 <Table.Column>RETAINER FEE</Table.Column>
                 <Table.Column>STATUS</Table.Column>

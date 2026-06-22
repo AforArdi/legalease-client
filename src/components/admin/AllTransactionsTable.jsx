@@ -3,6 +3,9 @@
 import { Table } from "@heroui/react";
 
 export default function AllTransactionsTable({ transactions }) {
+
+  const validTransactions = Array.isArray(transactions) ? transactions : [];
+
   const renderCell = (transaction, columnKey) => {
     switch (columnKey) {
       case "transactionId":
@@ -29,7 +32,7 @@ export default function AllTransactionsTable({ transactions }) {
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="w-full relative shadow-sm border border-gray-100 rounded-lg overflow-hidden">
-        <Table aria-label="Transactions Table" className="bg-[#F3F5F2] min-h-[200px] min-w-full rounded-none" removeWrapper>
+        <Table aria-label="Transactions Table" className="bg-[#F3F5F2] min-h-[200px] min-w-full rounded-none">
           <Table.ScrollContainer>
             <Table.Content>
               <Table.Header>
@@ -39,7 +42,7 @@ export default function AllTransactionsTable({ transactions }) {
                 <Table.Column>AMOUNT</Table.Column>
                 <Table.Column>DATE</Table.Column>
               </Table.Header>
-              <Table.Body items={transactions} emptyContent="No transactions found.">
+              <Table.Body items={validTransactions} emptyContent="No transactions found.">
                 {(item) => (
                   <Table.Row key={item._id || item.transactionId || Math.random()} className="hover:bg-gray-50 transition-colors border-b border-gray-100">
                     <Table.Cell>{renderCell(item, "transactionId")}</Table.Cell>
