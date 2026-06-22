@@ -17,8 +17,8 @@ const LawyerDetailsPage = async ({ params }) => {
 
     if (user && user.role !== "lawyer") {
         const hiringRequests = await getMyHiringReq(user.email);
-        hasHired = hiringRequests?.some(req => req.lawyerEmail === lawyer?.email);
-        hasAlreadyCommented = lawyerComments?.some(comment => comment.userEmail === user.email);
+        hasHired = Array.isArray(hiringRequests) ? hiringRequests.some(req => req.lawyerEmail === lawyer?.email) : false;
+        hasAlreadyCommented = Array.isArray(lawyerComments) ? lawyerComments.some(comment => comment.userEmail === user.email) : false;
     }
 
     // console.log(lawyer);

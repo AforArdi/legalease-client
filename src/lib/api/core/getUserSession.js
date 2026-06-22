@@ -16,9 +16,6 @@ export const verifyRole = async (role) => {
     if (!user) {
         redirect('/auth/login');
     }
-    if (user.role === "pending") {
-        redirect("/choose-role");
-    }
     if (user?.role !== role) {
         redirect('/unauthorized');
     }

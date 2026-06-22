@@ -24,22 +24,23 @@ export default function RoleSelectionPage() {
     }
 
     try {
-      const response = await serverMutation('/users/role', 'PATCH', {
-        email: session.user.email,
+      const { data, error } = await authClient.updateUser({
         role: selectedRole,
       });
 
-      if (response.message === "Role updated successfully") {
+      if (data) {
         toast.success(`Successfully registered as a ${selectedRole}!`);
+        // Refresh the router cache before redirecting so the server components see the new JWT
+        router.refresh();
+        
         // Redirect based on role
         if (selectedRole === "lawyer") {
           router.push("/dashboard/lawyer/manage-legal-profile");
         } else {
           router.push("/");
-          router.refresh();
         }
       } else {
-        toast.error(response.message || "Failed to update role");
+        toast.error(error?.message || "Failed to update role");
       }
     } catch (error) {
       console.error("Error updating role:", error);
