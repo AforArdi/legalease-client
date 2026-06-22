@@ -2,11 +2,18 @@ import { getLawyers } from "@/lib/api/lawyer/lawyer";
 import LawyerCard from "@/components/lawyer/LawyerCard";
 import LawyerCardSkeleton from "@/components/lawyer/LawyerCardSkeleton";
 import ServerPagination from "@/components/shared/ServerPagination";
+import FilterPanel from "@/components/utils/FilterPanel";
+import SearchLawyer from "@/components/utils/SearchLawyer";
 import { Suspense } from "react";
 
-const LawyersGrid = async ({ page }) => {
+const LawyersGrid = async ({ page, search, category, status }) => {
     try {
-        const response = await getLawyers({ page, limit: 8 });
+        const params = { page, limit: 8 };
+        if (search) params.search = search;
+        if (category) params.category = category;
+        if (status) params.status = status;
+
+        const response = await getLawyers(params);
         // The API returns { data, totalPages, currentPage } if page is requested
         const allLawyer = response.data || [];
         const totalPages = response.totalPages || 1;
@@ -34,7 +41,7 @@ const LawyersGrid = async ({ page }) => {
 };
 
 const BrowseLawyersPage = async ({ searchParams }) => {
-    const { page } = await searchParams;
+    const { page, search, category, status } = await searchParams;
     const currentPage = parseInt(page) || 1;
 
     return (
@@ -43,12 +50,17 @@ const BrowseLawyersPage = async ({ searchParams }) => {
                 Browse Lawyers
             </h1>
 
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+                <FilterPanel />
+                <SearchLawyer />
+            </div>
+
             <Suspense fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {[...Array(8)].map((_, i) => <LawyerCardSkeleton key={i} />)}
                 </div>
             }>
-                <LawyersGrid page={currentPage} />
+                <LawyersGrid page={currentPage} search={search} category={category} status={status} />
             </Suspense>
         </div>
     );
