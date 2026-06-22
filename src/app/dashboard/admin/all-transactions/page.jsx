@@ -1,9 +1,11 @@
 import { getAllTransactions } from "@/lib/api/admin/admin";
+import { getAuthToken } from "@/lib/api/core/getUserSession";
 import AllTransactionsTable from "@/components/admin/AllTransactionsTable";
 
 const AdminAllTransaction = async () => {
+    const token = await getAuthToken();
     // transactions is an array of objects, not a single object
-    const transactions = await getAllTransactions() || [];
+    const transactions = await getAllTransactions(token) || [];
 
     return (
         <div className="w-full">

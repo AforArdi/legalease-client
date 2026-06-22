@@ -1,5 +1,5 @@
 import { getLawyerById } from "@/lib/api/lawyer/lawyer";
-import { getUserSession } from "@/lib/api/core/getUserSession";
+import { getUserSession, getAuthToken } from "@/lib/api/core/getUserSession";
 import HireLawyerButton from "@/components/lawyer/HireLawyerButton";
 import { getLawyerComments } from "@/lib/api/comment/comment";
 import SendCommentModal from "@/components/user/SendCommentModal";
@@ -9,14 +9,15 @@ const LawyerDetailsPage = async ({ params }) => {
     const { id: lawyerId } = await params;
     const lawyer = await getLawyerById(lawyerId);
     const user = await getUserSession();
+    const token = await getAuthToken();
 
-    const lawyerComments = await getLawyerComments(lawyer?.email);
+    const lawyerComments = await getLawyerComments(lawyer?.email, token);
 
     let hasHired = false;
     let hasAlreadyCommented = false;
 
     if (user && user.role !== "lawyer") {
-        const hiringRequests = await getMyHiringReq(user.email);
+        const hiringRequests = await getMyHiringReq(user.email, token);
         hasHired = Array.isArray(hiringRequests) ? hiringRequests.some(req => req.lawyerEmail === lawyer?.email) : false;
         hasAlreadyCommented = Array.isArray(lawyerComments) ? lawyerComments.some(comment => comment.userEmail === user.email) : false;
     }

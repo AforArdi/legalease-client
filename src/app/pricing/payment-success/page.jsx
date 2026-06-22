@@ -1,6 +1,7 @@
 import { payment } from '@/lib/api/stripe/payment'
 import { stripe } from '@/lib/stripe'
 import { redirect } from 'next/navigation'
+import { getAuthToken } from '@/lib/api/core/getUserSession'
 
 export default async function Success({ searchParams }) {
     const { session_id } = await searchParams
@@ -21,6 +22,7 @@ export default async function Success({ searchParams }) {
     }
 
     if (status === 'complete') {
+        const token = await getAuthToken();
         await payment({
             userName: metadata.userName,
             userEmail: metadata.userEmail,
@@ -29,7 +31,7 @@ export default async function Success({ searchParams }) {
             fee: metadata.price,
             hiringReqId: metadata.hiringReqId,
             transactionId: session_id,
-        })
+        }, token)
         return (
             <section id="success">
                 <p>

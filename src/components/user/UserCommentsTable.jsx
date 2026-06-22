@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { editComment, deleteComment } from "@/lib/api/comment/comment";
 
 export default function UserCommentsTable({ userComments: initialComments }) {
-
+  console.log(initialComments);
   const validComments = Array.isArray(initialComments) ? initialComments : [];
 
   const [comments, setComments] = useState(initialComments || []);

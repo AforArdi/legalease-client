@@ -1,11 +1,13 @@
 import { getAllLawyers, getAllTransactions, getAllUsers } from "@/lib/api/admin/admin";
+import { getAuthToken } from "@/lib/api/core/getUserSession";
 import { Card } from "@heroui/react";
 import { Users, UserCircle, Briefcase, DollarSign } from "lucide-react";
 
 const AdminAnalytics = async () => {
-    const transactions = await getAllTransactions() || [];
-    const allUsers = await getAllUsers() || [];
-    const allLawyers = await getAllLawyers() || [];
+    const token = await getAuthToken();
+    const transactions = await getAllTransactions(token) || [];
+    const allUsers = await getAllUsers({}, token) || [];
+    const allLawyers = await getAllLawyers(token) || [];
 
     const totalHires = transactions.length;
     // allUsers contains everyone, so we filter by role to just get standard users

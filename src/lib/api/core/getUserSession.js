@@ -10,6 +10,16 @@ export const getUserSession = async () => {
 
     return session?.user || null;
 };
+export const getAuthToken = async () => {
+    try {
+        const { token } = await auth.api.getToken({
+            headers: await headers(),
+        }) || {};
+        return token || null;
+    } catch (e) {
+        return null;
+    }
+};
 export const verifyRole = async (role) => {
     const user = await getUserSession();
 

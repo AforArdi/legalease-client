@@ -1,10 +1,11 @@
 import { getUserComments } from "@/lib/api/comment/comment";
-import { getUserSession } from "@/lib/api/core/getUserSession";
+import { getUserSession, getAuthToken } from "@/lib/api/core/getUserSession";
 import UserCommentsTable from "@/components/user/UserCommentsTable";
 
 const UserCommentsPage = async () => {
     const user = await getUserSession();
-    const userComments = await getUserComments(user?.email);
+    const token = await getAuthToken();
+    const userComments = await getUserComments(user?.email, token);
 
     return (
         <div>

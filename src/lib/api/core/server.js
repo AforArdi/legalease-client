@@ -1,16 +1,20 @@
 import { baseUrl } from "../../baseUrl";
 import { authClient } from "@/lib/auth-client";
 
-export const serverMutation = async (path, method, data, customToken = null) => {
-    let tokenStr = customToken;
-    if (!tokenStr) {
-        try {
-            const { data: tokenData } = await authClient.token();
-            tokenStr = tokenData?.token;
-        } catch (e) {
-            // handle error gracefully
-        }
+// Resolves the JWT token on the client side.
+// Server Components should pass the token explicitly via the customToken parameter.
+const getToken = async () => {
+    try {
+        const { data: tokenData } = await authClient.token();
+        if (tokenData?.token) return tokenData.token;
+    } catch (e) {
+        // Not in a client context
     }
+    return null;
+};
+
+export const serverMutation = async (path, method, data, customToken = null) => {
+    const tokenStr = customToken || await getToken();
 
     const headers = {
         'Content-Type': 'application/json',
@@ -29,15 +33,7 @@ export const serverMutation = async (path, method, data, customToken = null) => 
 };
 
 export const serverFetch = async (path, customToken = null) => {
-    let tokenStr = customToken;
-    if (!tokenStr) {
-        try {
-            const { data: tokenData } = await authClient.token();
-            tokenStr = tokenData?.token;
-        } catch (e) {
-            // handle error gracefully
-        }
-    }
+    const tokenStr = customToken || await getToken();
 
     const headers = {};
     

@@ -12,9 +12,9 @@ export const deleteUser = async (email, role) => {
     const query = new URLSearchParams({ role }).toString();
     return await serverMutation(`/admin/users/${email}?${query}`, 'DELETE');
 }
-export const getAllTransactions = async () => {
-    return await serverFetch('/admin/transactions');
+export const getAllTransactions = async (customToken = null) => {
+    return await serverFetch('/admin/transactions', customToken);
 }
-export const getAllLawyers = async () => {
-    return await serverFetch('/admin/lawyers');
+export const getAllLawyers = async (customToken = null) => {
+    return await serverFetch('/admin/lawyers', customToken);
 }
