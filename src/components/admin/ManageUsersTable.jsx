@@ -2,13 +2,18 @@
 
 import { Button, Table, Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Modal, Avatar } from "@heroui/react";
 import { UserCog, Ban } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { changeUserRole, deleteUser } from "@/lib/api/admin/admin";
+import ServerPagination from "@/components/shared/ServerPagination";
 
-export default function ManageUsersTable({ initialUsers }) {
+export default function ManageUsersTable({ initialUsers, totalPages, currentPage }) {
   const [users, setUsers] = useState(initialUsers || []);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  useEffect(() => {
+    setUsers(initialUsers || []);
+  }, [initialUsers]);
 
   // Delete Modal State
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -89,9 +94,16 @@ export default function ManageUsersTable({ initialUsers }) {
           <div className="flex items-center gap-4 text-gray-500">
             <Dropdown>
               <DropdownTrigger>
-                <Button isIconOnly variant="light" size="sm" className="text-gray-500 hover:text-gray-900 focus:outline-none min-w-unit-0" isLoading={isProcessing}>
-                  <UserCog size={20} />
-                </Button>
+                <div
+                  role="button"
+                  className="p-2 cursor-pointer text-gray-500 hover:text-gray-900 hover:bg-black/5 rounded-md transition-colors flex items-center justify-center min-w-unit-0"
+                >
+                  {isProcessing ? (
+                    <span className="animate-spin border-2 border-gray-500 border-t-transparent rounded-full w-5 h-5" />
+                  ) : (
+                    <UserCog size={20} />
+                  )}
+                </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Role Actions">
                 <DropdownItem key="user" onPress={() => handleRoleChange(user, 'user')}>Make User</DropdownItem>
@@ -114,7 +126,7 @@ export default function ManageUsersTable({ initialUsers }) {
       <div className="w-full relative shadow-sm border border-gray-100 rounded-lg overflow-hidden">
         <Table aria-label="Manage Users Table" className="bg-[#F3F5F2] min-h-[200px] min-w-full rounded-none">
           <Table.ScrollContainer>
-            <Table.Content>
+            <Table.Content aria-label="All Users">
               <Table.Header>
                 <Table.Column isRowHeader>Avatar</Table.Column>
                 <Table.Column>Name & Email</Table.Column>
@@ -167,6 +179,8 @@ export default function ManageUsersTable({ initialUsers }) {
           </Modal.Container>
         </Modal.Backdrop>
       </Modal>
+
+      <ServerPagination totalPages={totalPages} currentPage={currentPage} />
     </div>
   );
 }

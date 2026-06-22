@@ -1,14 +1,23 @@
 import { baseUrl } from "../../baseUrl";
 import { authClient } from "@/lib/auth-client";
 
-export const serverMutation = async (path, method, data) => {
-    const { data: tokenData } = await authClient.token();
+export const serverMutation = async (path, method, data, customToken = null) => {
+    let tokenStr = customToken;
+    if (!tokenStr) {
+        try {
+            const { data: tokenData } = await authClient.token();
+            tokenStr = tokenData?.token;
+        } catch (e) {
+            // handle error gracefully
+        }
+    }
+
     const headers = {
         'Content-Type': 'application/json',
     };
     
-    if (tokenData?.token) {
-        headers['Authorization'] = `Bearer ${tokenData.token}`;
+    if (tokenStr) {
+        headers['Authorization'] = `Bearer ${tokenStr}`;
     }
 
     const res = await fetch(`${baseUrl}${path}`, {
@@ -19,12 +28,21 @@ export const serverMutation = async (path, method, data) => {
     return res.json();
 };
 
-export const serverFetch = async (path) => {
-    const { data: tokenData } = await authClient.token();
+export const serverFetch = async (path, customToken = null) => {
+    let tokenStr = customToken;
+    if (!tokenStr) {
+        try {
+            const { data: tokenData } = await authClient.token();
+            tokenStr = tokenData?.token;
+        } catch (e) {
+            // handle error gracefully
+        }
+    }
+
     const headers = {};
     
-    if (tokenData?.token) {
-        headers['Authorization'] = `Bearer ${tokenData.token}`;
+    if (tokenStr) {
+        headers['Authorization'] = `Bearer ${tokenStr}`;
     }
 
     const res = await fetch(`${baseUrl}${path}`, {

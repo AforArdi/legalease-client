@@ -1,20 +1,28 @@
 import { getLawyers } from "@/lib/api/lawyer/lawyer";
 import LawyerCard from "@/components/lawyer/LawyerCard";
 import LawyerCardSkeleton from "@/components/lawyer/LawyerCardSkeleton";
+import ServerPagination from "@/components/shared/ServerPagination";
 import { Suspense } from "react";
 
-const LawyersGrid = async () => {
+const LawyersGrid = async ({ page }) => {
     try {
-        const allLawyer = await getLawyers();
+        const response = await getLawyers({ page, limit: 8 });
+        // The API returns { data, totalPages, currentPage } if page is requested
+        const allLawyer = response.data || [];
+        const totalPages = response.totalPages || 1;
+
         if (!allLawyer || allLawyer.length === 0) {
             return <div className="text-gray-500 py-10">No lawyers found.</div>;
         }
         return (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {allLawyer.map((lawyer) => (
-                    <LawyerCard key={lawyer._id} lawyer={lawyer} />
-                ))}
-            </div>
+            <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+                    {allLawyer.map((lawyer) => (
+                        <LawyerCard key={lawyer._id} lawyer={lawyer} />
+                    ))}
+                </div>
+                <ServerPagination totalPages={totalPages} currentPage={page} />
+            </>
         );
     } catch (error) {
         return (
@@ -25,7 +33,10 @@ const LawyersGrid = async () => {
     }
 };
 
-const BrowseLawyersPage = () => {
+const BrowseLawyersPage = async ({ searchParams }) => {
+    const { page } = await searchParams;
+    const currentPage = parseInt(page) || 1;
+
     return (
         <div className="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16">
             <h1 className="text-3xl md:text-4xl font-bold text-[#0A2519] mb-8">
@@ -37,7 +48,7 @@ const BrowseLawyersPage = () => {
                     {[...Array(8)].map((_, i) => <LawyerCardSkeleton key={i} />)}
                 </div>
             }>
-                <LawyersGrid />
+                <LawyersGrid page={currentPage} />
             </Suspense>
         </div>
     );

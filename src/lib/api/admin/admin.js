@@ -1,7 +1,9 @@
 import { serverFetch, serverMutation } from "../core/server";
 
-export const getAllUsers = async () => {
-    return await serverFetch('/admin/users');
+export const getAllUsers = async (params = {}, customToken = null) => {
+    const query = new URLSearchParams(params).toString();
+    const url = query ? `/admin/users?${query}` : '/admin/users';
+    return await serverFetch(url, customToken);
 }
 export const changeUserRole = async (email, currentRole, newRole) => {
     return await serverMutation('/admin/users/role', 'PATCH', { email, currentRole, newRole });
