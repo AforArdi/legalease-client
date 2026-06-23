@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Link, Button, Avatar, Dropdown, Label } from "@heroui/react";
 import UserProfileDropdown from "../utils/UserProfileDropdown";
 import { authClient } from "@/lib/auth-client";
+import { getFreshUser } from "@/lib/api/core/getUserSession";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
     const { data: session, isPending, error, } = authClient.useSession();
-    const user = session?.user;
-    // console.log(user);
+    const [dbUser, setDbUser] = useState(null);
+
+    useEffect(() => {
+        if (session?.user?.email) {
+            getFreshUser(session.user.email).then((freshUser) => {
+                if (freshUser) {
+                    setDbUser(freshUser);
+                }
+            });
+        }
+    }, [session?.user?.email]);
+
+    const user = dbUser || session?.user;
 
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
@@ -53,7 +65,7 @@ const Navbar = () => {
                                 <Button variant="ghost">Login</Button>
                             </Link>
                             <Link href="/auth/register">
-                                <Button color="primary">Get Started</Button>
+                                <Button color="primary" className={'rounded-md'}>Get Started</Button>
                             </Link>
                         </>
                     ) : (
