@@ -7,35 +7,35 @@ const categories = [
         title: 'Corporate',
         description: 'Mergers, Acquisitions, Compliance',
         icon: Building2,
-        keyword: 'corporate'
+        keyword: 'Corporate'
     },
     {
         ref: 'REF. 002-FAM',
         title: 'Family',
         description: 'Divorce, Custody, Estates',
         icon: Home,
-        keyword: 'family'
+        keyword: 'Family'
     },
     {
         ref: 'REF. 003-CRIM',
         title: 'Criminal',
         description: 'Defense, Appeals, Investigations',
         icon: Gavel,
-        keyword: 'criminal'
+        keyword: 'Criminal'
     },
     {
         ref: 'REF. 004-IP',
         title: 'Intellectual Property',
         description: 'Patents, Trademarks, Copyrights',
         icon: Lightbulb,
-        keyword: 'intellectual-property'
+        keyword: 'Intellectual+Property'
     },
     {
         ref: 'REF. 005-CYB',
         title: 'Cyber',
         description: 'Cybercrime, Privacy & Digital Fraud',
         icon: Shield,
-        keyword: 'cyber'
+        keyword: 'Cyber'
     }
 ];
 
@@ -53,7 +53,7 @@ const LegalCategories = () => {
                     return (
                         <Link
                             key={category.ref}
-                            href={`/browse-lawyers?category=${category.keyword}`}
+                            href={`/lawyers?category=${category.keyword}`}
                             className={`grid grid-cols-1 md:grid-cols-4 items-center w-full py-6 px-4 md:px-6 transition-colors duration-200 ${index % 2 === 1 ? 'bg-[#f6f6f6]' : 'bg-transparent'
                                 } hover:bg-[#eaeaea]`}
                         >
