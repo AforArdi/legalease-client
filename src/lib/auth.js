@@ -2,8 +2,10 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins/jwt";
+import { admin } from "better-auth/plugins"
 
 const client = new MongoClient(process.env.MONGO_DB_URI);
+// exported db name to get latest user info on navbar dropdown
 export const db = client.db(process.env.MONGO_USER_DB);
 
 export const auth = betterAuth({
@@ -32,10 +34,11 @@ export const auth = betterAuth({
         cookieCache: {
             enabled: true,
             strategy: 'jwt',
-            maxAge: 7 * 24 * 60 * 60,
+            maxAge: 7 * 24 * 60 * 60, // 7 days
         }
     },
     plugins: [
         jwt(),
+        admin(),
     ],
 });

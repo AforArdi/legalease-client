@@ -14,14 +14,14 @@ const Navbar = () => {
     const [dbUser, setDbUser] = useState(null);
 
     useEffect(() => {
-        if (session?.user?.email) {
-            getFreshUser(session.user.email).then((freshUser) => {
+        if (session?.user) {
+            getFreshUser().then((freshUser) => {
                 if (freshUser) {
                     setDbUser(freshUser);
                 }
             });
         }
-    }, [session?.user?.email]);
+    }, [session?.user]);
 
     const user = dbUser || session?.user;
 
