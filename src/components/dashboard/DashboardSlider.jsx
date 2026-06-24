@@ -63,9 +63,9 @@ export default function DashboardSlider({ role }) {
             {/* Desktop Sidebar (Persistent) */}
             <aside className="hidden md:flex flex-col w-64 min-h-[calc(100vh-80px)] border-r border-gray-200 bg-[#F9F9F9] px-4 py-6 shrink-0">
                 <div className="flex items-center gap-3">
-                    <Link href="/" className="font-bold text-2xl text-foreground">
-                        LegalEase
-                    </Link>
+                    <span className="text-xl">
+                        {role ? role.charAt(0).toUpperCase() + role.slice(1).toLowerCase() + ' ' : ''}Dashboard
+                    </span>
                 </div>
                 {renderLinks()}
             </aside>

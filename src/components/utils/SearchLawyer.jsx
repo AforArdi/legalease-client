@@ -31,7 +31,7 @@ export default function SearchLawyer() {
       <Button
         type="submit"
         size="sm"
-        className="bg-[#A48039] text-white font-medium rounded-md px-4"
+        className="bg-[#0A2519] text-white font-medium rounded-md px-4"
       >
         Search
       </Button>

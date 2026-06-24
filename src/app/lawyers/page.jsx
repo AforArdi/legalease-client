@@ -1,6 +1,5 @@
 import { getLawyers } from "@/lib/api/lawyer/lawyer";
 import LawyerCard from "@/components/lawyer/LawyerCard";
-import LawyerCardSkeleton from "@/components/lawyer/LawyerCardSkeleton";
 import ServerPagination from "@/components/shared/ServerPagination";
 import FilterPanel from "@/components/utils/FilterPanel";
 import SearchLawyer from "@/components/utils/SearchLawyer";
@@ -57,7 +56,7 @@ const BrowseLawyersPage = async ({ searchParams }) => {
 
             <Suspense fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {[...Array(8)].map((_, i) => <LawyerCardSkeleton key={i} />)}
+                    {[...Array(8)].map((_, i) => <LawyerCard key={i} />)}
                 </div>
             }>
                 <LawyersGrid page={currentPage} search={search} category={category} status={status} />
