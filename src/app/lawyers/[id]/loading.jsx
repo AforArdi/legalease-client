@@ -6,7 +6,7 @@ export default function LawyerDetailsSkeleton() {
             <div className="flex flex-col md:flex-row gap-12">
                 {/* Left Sidebar Skeleton */}
                 <div className="w-full md:w-1/3 flex flex-col">
-                    <Skeleton className="w-full h-80 md:h-[400px] mb-6 rounded-none bg-gray-100" />
+                    <Skeleton className="w-full h-80 md:h-100 mb-6 rounded-none bg-gray-100" />
                     
                     <Skeleton className="h-8 w-3/4 mb-3 rounded-md" />
                     <Skeleton className="h-4 w-1/2 mb-8 rounded-md" />
