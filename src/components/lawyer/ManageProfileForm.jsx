@@ -69,7 +69,7 @@ export default function ManageProfileForm({ initialData, sessionUser }) {
   };
 
   const onSubmit = async (data) => {
-    console.log(data.fullName);
+    // console.log(data.fullName);
 
     if (!sessionUser?.email) return;
 

@@ -24,7 +24,7 @@ export default function RegisterPage() {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         // Safety check: Ensure the user actually selected a file
         if (!data.image || !data.image[0]) {
             toast.error("Please select a valid image file.");
