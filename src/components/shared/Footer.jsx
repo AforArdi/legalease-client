@@ -10,14 +10,6 @@ const Footer = () => {
                     {/* Brand and Description */}
                     <div className="flex flex-col gap-4">
                         <div className="flex items-center gap-2">
-                            {/* SVG Scales Logo */}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground">
-                                <path d="M12 3v18" />
-                                <path d="M3 7h18" />
-                                <path d="M5 7v4a2 2 0 0 0 4 0V7" />
-                                <path d="M15 7v4a2 2 0 0 0 4 0V7" />
-                                <path d="M9 21h6" />
-                            </svg>
                             <span className="font-bold text-xl text-foreground">LegalEase</span>
                         </div>
                         <p className="text-sm text-muted-foreground mt-2 max-w-xs">

@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from 'motion/react';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
 import { Button } from '@heroui/react';
@@ -39,20 +41,36 @@ const Banner = () => {
 
                             {/* Centered Content */}
                             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
-                                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                                <motion.h1 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.2 }}
+                                    className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                                >
                                     Justice, meticulously organized.
-                                </h1>
-                                <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-10 max-w-3xl">
+                                </motion.h1>
+                                <motion.p 
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.4 }}
+                                    className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-10 max-w-3xl"
+                                >
                                     Access elite legal counsel through our rigorous, archival system. Every detail verified. Every case perfectly filed.
-                                </p>
-                                <Link href={'/lawyers'}>
-                                    <Button
-                                        size="lg"
-                                        className="bg-[#A48039] hover:bg-[#8e6e30] text-white font-semibold px-10 py-6 tracking-wide rounded-sm transition-colors"
-                                    >
-                                        BROWSE LAWYERS
-                                    </Button>
-                                </Link>
+                                </motion.p>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.6 }}
+                                >
+                                    <Link href={'/lawyers'}>
+                                        <Button
+                                            size="lg"
+                                            className="bg-[#A48039] hover:bg-[#8e6e30] text-white font-semibold px-10 py-6 tracking-wide rounded-sm transition-colors"
+                                        >
+                                            BROWSE LAWYERS
+                                        </Button>
+                                    </Link>
+                                </motion.div>
                             </div>
                         </div>
                     </SwiperSlide>

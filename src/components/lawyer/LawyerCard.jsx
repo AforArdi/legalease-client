@@ -1,13 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Card, Button, Skeleton } from "@heroui/react";
+import { motion } from "motion/react";
 
-const LawyerCard = ({ lawyer, isLoading }) => {
+const LawyerCard = ({ lawyer, isLoading, index = 0 }) => {
     // 1. Render the HeroUI Standalone Skeleton matching the card's exact dimensions
     if (isLoading || !lawyer) {
         return (
-            <Card className="p-0 h-full border border-gray-100 shadow-sm rounded-2xl overflow-hidden bg-white">
-                <div className="flex flex-col h-full w-full">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="h-full"
+            >
+                <Card className="p-0 h-full border border-gray-100 shadow-sm rounded-2xl overflow-hidden bg-white">
+                    <div className="flex flex-col h-full w-full">
                     {/* Skeleton Image Section */}
                     <div className="relative w-full h-72 shrink-0 bg-[#F3F5F2]">
                         <Skeleton className="w-full h-full rounded-none" />
@@ -37,6 +47,7 @@ const LawyerCard = ({ lawyer, isLoading }) => {
                     </div>
                 </div>
             </Card>
+            </motion.div>
         );
     }
 
@@ -44,8 +55,16 @@ const LawyerCard = ({ lawyer, isLoading }) => {
     const { _id, name, image, category, fee, status } = lawyer;
 
     return (
-        <Card className="p-0 h-full border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 rounded-2xl overflow-hidden group bg-white">
-            <Link href={`/lawyers/${_id || ''}`} className="flex flex-col h-full w-full">
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="h-full block"
+        >
+            <Card className="p-0 h-full border border-gray-100 shadow-sm transition-shadow hover:shadow-xl duration-300 rounded-2xl overflow-hidden group bg-white">
+                <Link href={`/lawyers/${_id || ''}`} className="flex flex-col h-full w-full">
 
                 {/* Image Section */}
                 <div className="relative w-full h-72 overflow-hidden bg-[#F3F5F2] shrink-0">
@@ -105,6 +124,7 @@ const LawyerCard = ({ lawyer, isLoading }) => {
 
             </Link>
         </Card>
+        </motion.div>
     );
 };
 

@@ -20,7 +20,7 @@ const FeaturedLawyersGrid = async () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {featuredLawyers.map((lawyer, idx) => (
-                <LawyerCard key={lawyer._id || idx} lawyer={lawyer} />
+                <LawyerCard key={lawyer._id || idx} lawyer={lawyer} index={idx} />
             ))}
         </div>
     );
