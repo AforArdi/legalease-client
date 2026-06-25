@@ -18,3 +18,6 @@ export const getLawyerHiringReq = async (lawyerEmail) => {
 export const updateHiringReqStatus = async (id, status) => {
     return await serverMutation(`/lawyer/hiring/${id}`, 'PATCH', { status });
 }
+export const getTopLawyers = async () => {
+    return await serverFetch('/lawyers/top');
+}
