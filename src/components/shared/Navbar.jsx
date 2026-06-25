@@ -52,7 +52,7 @@ const Navbar = () => {
             <header className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                 {/* Left Side: Logo */}
                 <div className="flex items-center gap-3">
-                    <Link href="/" className="font-bold text-2xl text-foreground">
+                    <Link href="/" className="font-bold text-2xl text-foreground hover:no-underline">
                         LegalEase
                     </Link>
                 </div>
@@ -65,7 +65,7 @@ const Navbar = () => {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`relative z-0 px-4 py-2 font-medium transition-colors rounded-full ${isActive ? "text-white" : "text-foreground hover:text-primary"
+                                    className={`relative z-0 px-4 py-2 font-medium transition-colors rounded-full hover:no-underline ${isActive ? "text-white" : "text-foreground hover:text-primary"
                                         }`}
                                 >
                                     {isActive && (
@@ -94,7 +94,6 @@ const Navbar = () => {
                             <div className="w-40 sm:w-48 lg:w-64 shrink-0 relative">
                                 {/* If using a standard/custom Input, you might need to handle the icon positioning manually */}
                                 <Magnifier className="absolute left-3 top-1/2 -translate-y-1/2 text-default-400 w-4 h-4 z-10" />
-
                                 <Input
                                     name="search"
                                     type="search"
@@ -130,11 +129,11 @@ const Navbar = () => {
                     <div className="hidden lg:flex items-center gap-4">
                         {!session ? (
                             <>
-                                <Link href="/auth/login">
+                                <Link href="/auth/login" className={'hover:no-underline'}>
                                     <Button variant="ghost">Login</Button>
                                 </Link>
-                                <Link href="/auth/register">
-                                    <Button color="primary" className={'rounded-md'}>Get Started</Button>
+                                <Link href="/auth/register" className={'hover:no-underline'}>
+                                    <Button color="primary" className={'rounded-md bg-black text-white'}>Get Started</Button>
                                 </Link>
                             </>
                         ) : (

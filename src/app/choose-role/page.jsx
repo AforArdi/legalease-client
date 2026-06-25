@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { Button, RadioGroup, Radio, Description } from "@heroui/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { RoleCard } from "@/components/utils/RoleCard";
-import { serverMutation } from "@/lib/api/core/server";
+// import { serverMutation } from "@/lib/api/core/server";
+import { FiUser, FiBriefcase } from "react-icons/fi";
 
 export default function RoleSelectionPage() {
   const [selectedRole, setSelectedRole] = useState("");
@@ -32,7 +32,7 @@ export default function RoleSelectionPage() {
         toast.success(`Successfully registered as a ${selectedRole}!`);
         // Refresh the router cache before redirecting so the server components see the new JWT
         router.refresh();
-        
+
         // Redirect based on role
         if (selectedRole === "lawyer") {
           router.push("/dashboard/lawyer/manage-legal-profile");
@@ -43,58 +43,84 @@ export default function RoleSelectionPage() {
         toast.error(error?.message || "Failed to update role");
       }
     } catch (error) {
-      console.error("Error updating role:", error);
+      // console.error("Error updating role:", error);
       toast.error("An error occurred while updating the role");
     }
   };
 
+  const roles = [
+    {
+      value: "user",
+      label: "Client",
+      icon: <FiUser className="w-6 h-6" />,
+      description: "I am looking for legal counsel and expert representation.",
+    },
+    {
+      value: "lawyer",
+      label: "Lawyer",
+      icon: <FiBriefcase className="w-6 h-6" />,
+      description: "I am a legal professional looking to manage my practice.",
+    },
+  ];
+
   return (
-    <div className="flex flex-col gap-6 items-center py-20 min-h-[calc(100vh-80px)] bg-[#F9F9F9]">
-      <div className="text-center max-w-2xl px-4 mb-8">
-        <h1 className="text-4xl font-bold text-[#0A2519] mb-4">Select Your Designation</h1>
-        <p className="text-gray-600">
-          Please identify your primary role within the LegalEase registry to proceed with your onboarding.
-        </p>
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] bg-[#F9F9F9] px-4 py-16">
+      <div className="w-full max-w-lg">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0A2519] mb-3">
+            Select Your Designation
+          </h1>
+          <p className="text-gray-500 text-sm">
+            Choose your role to get started with LegalEase.
+          </p>
+        </div>
 
-      <div className="flex md:flex-row flex-col gap-8 px-4">
-        <RoleCard
-          value="user"
-          selectedValue={selectedRole}
-          onSelect={setSelectedRole}
-          description="I am looking for legal counsel and expert representation. Access a curated registry of vetted professionals and manage your case dossiers."
-          buttonText="Select Client Role"
-          icon={
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
-          }
+        <RadioGroup
+          value={selectedRole}
+          onChange={setSelectedRole}
+          className="gap-4"
         >
-          Client
-        </RoleCard>
+          {roles.map((role) => (
+            <Radio
+              key={role.value}
+              value={role.value}
+              className={`w-full border-2 rounded-none px-6 py-5 cursor-pointer transition-all duration-200 ${selectedRole === role.value
+                ? "border-[#0A2519] bg-[#EAECE8]"
+                : "border-gray-200 bg-white hover:border-gray-300"
+                }`}
+            >
+              <Radio.Content>
+                <Radio.Control className="hidden">
+                  <Radio.Indicator />
+                </Radio.Control>
+                <div className="flex items-center gap-4 w-full">
+                  <div
+                    className={`w-11 h-11 rounded-sm flex items-center justify-center shrink-0 transition-colors ${selectedRole === role.value
+                      ? "bg-[#0A2519] text-white"
+                      : "bg-gray-100 text-gray-500"
+                      }`}
+                  >
+                    {role.icon}
+                  </div>
+                  <div>
+                    <span className="text-lg font-semibold text-[#0A2519]">
+                      {role.label}
+                    </span>
+                    <Description className="text-gray-500 text-xs mt-0.5">
+                      {role.description}
+                    </Description>
+                  </div>
+                </div>
+              </Radio.Content>
+            </Radio>
+          ))}
+        </RadioGroup>
 
-        <RoleCard
-          value="lawyer"
-          selectedValue={selectedRole}
-          onSelect={setSelectedRole}
-          description="I am a legal professional looking to manage my practice and clients. Utilize archival-grade tools for docket management and client communication."
-          buttonText="Select Lawyer Role"
-          icon={
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14 11H10v-2h4v2zm-2-9c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm4 13h-8v-2h8v2zm0-6h-8v-2h8v2z" />
-            </svg>
-          }
-        >
-          Lawyer
-        </RoleCard>
-      </div>
-
-      <div className="mt-8 px-4 w-full flex justify-center">
         <Button
           color="primary"
           onPress={handleRoleSubmit}
           isDisabled={!selectedRole}
-          className="w-full max-w-[400px] bg-[#A48039] hover:bg-[#8e6e30] font-bold text-white rounded-none py-6"
+          className="w-full bg-[#0A2519] hover:bg-[#143d2a] font-semibold text-white rounded-none py-6 mt-8 text-base"
         >
           Complete Registration
         </Button>

@@ -82,7 +82,9 @@ export default function DashboardSlider({ role }) {
                             <Drawer.Dialog>
                                 <Drawer.CloseTrigger />
                                 <Drawer.Header>
-                                    <Drawer.Heading className="text-xl font-bold text-[#0A2519]">Menu</Drawer.Heading>
+                                    <Drawer.Heading className="text-xl font-bold text-[#0A2519]">
+                                        {role ? role.charAt(0).toUpperCase() + role.slice(1).toLowerCase() + ' ' : ''}Dashboard
+                                    </Drawer.Heading>
                                 </Drawer.Header>
                                 <Drawer.Body>
                                     {renderLinks()}
