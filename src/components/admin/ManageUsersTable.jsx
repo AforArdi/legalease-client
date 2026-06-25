@@ -60,10 +60,20 @@ export default function ManageUsersTable({ initialUsers, totalPages, currentPage
 
   const renderCell = (user, columnKey) => {
     switch (columnKey) {
-      case "avatar":
+      case "avatar": {
+        const nameStr = user.name || user.email || "";
+        const parts = nameStr.trim().split(/\s+/);
+        const fallback = parts.length > 1 
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() 
+          : (parts[0]?.[0] || "?").toUpperCase();
+
         return (
-          <Avatar radius="lg" src={user.image} name={user.name?.charAt(0) || user.email?.charAt(0)} />
+          <Avatar radius="lg">
+            <Avatar.Image alt={user.name || "User avatar"} src={user.image} />
+            <Avatar.Fallback>{fallback}</Avatar.Fallback>
+          </Avatar>
         );
+      }
       case "name_email":
         return (
           <div className="flex flex-col">
