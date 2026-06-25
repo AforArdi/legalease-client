@@ -3,6 +3,7 @@ import LawyerCard from "@/components/lawyer/LawyerCard";
 import ServerPagination from "@/components/shared/ServerPagination";
 import FilterPanel from "@/components/utils/FilterPanel";
 import SearchLawyer from "@/components/utils/SearchLawyer";
+import NoDataFound from "@/components/utils/NoDataFound";
 import { Suspense } from "react";
 
 const LawyersGrid = async ({ page, search, category, status }) => {
@@ -18,7 +19,7 @@ const LawyersGrid = async ({ page, search, category, status }) => {
         const totalPages = response.totalPages || 1;
 
         if (!allLawyer || allLawyer.length === 0) {
-            return <div className="text-gray-500 py-10">No lawyers found.</div>;
+            return <NoDataFound title="No lawyers found" />;
         }
         return (
             <>
