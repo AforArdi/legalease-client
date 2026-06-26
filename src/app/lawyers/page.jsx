@@ -6,12 +6,13 @@ import SearchLawyer from "@/components/utils/SearchLawyer";
 import NoDataFound from "@/components/utils/NoDataFound";
 import { Suspense } from "react";
 
-const LawyersGrid = async ({ page, search, category, status }) => {
+const LawyersGrid = async ({ page, search, category, status, fee }) => {
     try {
         const params = { page, limit: 8 };
         if (search) params.search = search;
         if (category) params.category = category;
         if (status) params.status = status;
+        if (fee) params.fee = fee;
 
         const response = await getLawyers(params);
         // The API returns { data, totalPages, currentPage } if page is requested
@@ -41,7 +42,7 @@ const LawyersGrid = async ({ page, search, category, status }) => {
 };
 
 const BrowseLawyersPage = async ({ searchParams }) => {
-    const { page, search, category, status } = await searchParams;
+    const { page, search, category, status, fee } = await searchParams;
     const currentPage = parseInt(page) || 1;
 
     return (
@@ -60,7 +61,7 @@ const BrowseLawyersPage = async ({ searchParams }) => {
                     {[...Array(8)].map((_, i) => <LawyerCard key={i} />)}
                 </div>
             }>
-                <LawyersGrid page={currentPage} search={search} category={category} status={status} />
+                <LawyersGrid page={currentPage} search={search} category={category} status={status} fee={fee} />
             </Suspense>
         </div>
     );

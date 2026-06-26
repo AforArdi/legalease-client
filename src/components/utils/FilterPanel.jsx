@@ -9,6 +9,7 @@ const CATEGORIES = ["Corporate", "Family", "Criminal", "Intellectual Property", 
 export default function FilterPanel() {
   const [category, setCategory] = useState("");
   const [availability, setAvailability] = useState("");
+  const [fee, setFee] = useState("");
   const router = useRouter();
 
   const handleApplyFilters = () => {
@@ -23,6 +24,11 @@ export default function FilterPanel() {
     } else {
       params.delete("status");
     }
+    if (fee) {
+      params.set("fee", fee);
+    } else {
+      params.delete("fee");
+    }
     params.delete("page");
     router.push(`/lawyers?${params.toString()}`);
   };
@@ -30,6 +36,7 @@ export default function FilterPanel() {
   const handleReset = () => {
     setCategory("");
     setAvailability("");
+    setFee("");
     router.push("/lawyers");
   };
 
@@ -61,6 +68,24 @@ export default function FilterPanel() {
           <option value="">All</option>
           <option value="Available">Available</option>
           <option value="Busy">Busy</option>
+        </select>
+      </div>
+
+      {/* Fee / Price Filter */}
+      <div className="flex flex-col gap-1 min-w-[160px]">
+        <Label className="text-xs font-semibold uppercase tracking-wider text-gray-500">Fee / Price</Label>
+        <select
+          value={fee}
+          onChange={(e) => setFee(e.target.value)}
+          className="h-10 bg-white border border-gray-200 rounded-md px-3 text-sm text-[#0A2519] outline-none focus:border-[#A48039]"
+        >
+          <option value="">All Prices</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="0-50">Under $50</option>
+          <option value="50-150">$50 to $150</option>
+          <option value="150-250">$150 to $250</option>
+          <option value="250-max">$250 and above</option>
         </select>
       </div>
 
