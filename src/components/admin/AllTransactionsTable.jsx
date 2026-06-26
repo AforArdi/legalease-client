@@ -1,15 +1,44 @@
 "use client";
 
-import { Table } from "@heroui/react";
+import { Table, Button } from "@heroui/react";
+import { Copy } from '@gravity-ui/icons';
+import toast from "react-hot-toast";
 
 export default function AllTransactionsTable({ transactions }) {
-
   const validTransactions = Array.isArray(transactions) ? transactions : [];
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    toast.success("Transaction ID copied to clipboard!");
+  };
 
   const renderCell = (transaction, columnKey) => {
     switch (columnKey) {
-      case "transactionId":
-        return <span className="text-sm font-mono text-gray-600">{transaction.transactionId}</span>;
+      case "transactionId": {
+        const fullId = transaction.transactionId || "N/A";
+        // Format: show first 8 chars... then last 4 chars (e.g., cs_test_...abcd)
+        const shortId = fullId.length > 15
+          ? `${fullId.substring(0, 10)}...${fullId.substring(fullId.length - 4)}`
+          : fullId;
+
+        return (
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-mono text-gray-600" title={fullId}>
+              {shortId}
+            </span>
+            <Button
+              isIconOnly
+              size="sm"
+              variant="light"
+              className="text-gray-400 hover:text-gray-800 min-w-8 w-8 h-8"
+              onPress={() => handleCopy(fullId)}
+              aria-label="Copy Transaction ID"
+            >
+              <Copy width={16} height={16} />
+            </Button>
+          </div>
+        );
+      }
       case "userEmail":
         return <span className="text-sm text-[#0A2519]">{transaction.userEmail}</span>;
       case "lawyerEmail":

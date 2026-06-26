@@ -63,8 +63,8 @@ export default function ManageUsersTable({ initialUsers, totalPages, currentPage
       case "avatar": {
         const nameStr = user.name || user.email || "";
         const parts = nameStr.trim().split(/\s+/);
-        const fallback = parts.length > 1 
-          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() 
+        const fallback = parts.length > 1
+          ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
           : (parts[0]?.[0] || "?").toUpperCase();
 
         return (
