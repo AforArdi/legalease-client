@@ -4,6 +4,7 @@ import { Button, Chip, Table, TableHeader, TableColumn, TableBody, TableRow, Tab
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { getMyHiringReq } from "@/lib/api/user/user";
+import Link from "next/link";
 
 const statusColorMap = {
   Pending: "warning",
@@ -37,7 +38,13 @@ export default function UserHiringHistoryTable({ sessionUser }) {
   const renderCell = (request, columnKey) => {
     switch (columnKey) {
       case "lawyer":
-        return <span className="text-sm font-medium text-[#0A2519]">{request.lawyerName}</span>;
+        return request.lawyerId ? (
+          <Link href={`/lawyers/${request.lawyerId}`} className="text-sm font-medium text-[#0A2519] underline hover:text-[#A48039]">
+            {request.lawyerName}
+          </Link>
+        ) : (
+          <span className="text-sm font-medium text-[#0A2519]">{request.lawyerName}</span>
+        );
       case "date":
         return <span className="text-sm text-gray-600">{new Date(request.createdAt).toLocaleDateString()}</span>;
       case "fee":
