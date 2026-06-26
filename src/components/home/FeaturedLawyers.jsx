@@ -14,7 +14,7 @@ const FeaturedLawyersGrid = async () => {
     }
 
     if (!featuredLawyers || featuredLawyers.length === 0) {
-        return <div className="text-gray-500 py-4">No featured lawyers available at the moment.</div>;
+        return <div className="text-gray-500 py-4 text-center w-full">No featured lawyers available at the moment.</div>;
     }
 
     return (
