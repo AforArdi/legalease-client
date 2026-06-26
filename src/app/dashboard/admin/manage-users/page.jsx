@@ -20,7 +20,7 @@ export default async function AdminManageUsers({ searchParams }) {
     return (
         <div className="w-full">
             <div>
-                <h1 className="text-3xl font-bold text-[#0A2519] mb-2">Manage Users</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0A2519] mb-2">Manage Users</h1>
                 <p className="text-gray-600 text-sm mb-6">View, manage, and change roles for all users and lawyers in the system.</p>
             </div>
 

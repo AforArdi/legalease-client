@@ -60,22 +60,26 @@ export default function DashboardSlider({ role }) {
 
     return (
         <>
-            {/* Desktop Sidebar (Persistent) */}
-            <aside className="hidden md:flex flex-col w-64 min-h-[calc(100vh-80px)] border-r border-gray-200 bg-[#F9F9F9] px-4 py-6 shrink-0">
+            {/* Desktop Sidebar (Persistent) - Changed to lg:flex to save space on medium devices */}
+            <aside className="hidden lg:flex flex-col w-64 min-h-[calc(100vh-80px)] border-r border-gray-200 bg-[#F9F9F9] px-4 py-6 shrink-0">
                 <div className="flex items-center gap-3">
-                    <span className="text-xl">
+                    <span className="text-xl font-bold text-[#0A2519]">
                         {role ? role.charAt(0).toUpperCase() + role.slice(1).toLowerCase() + ' ' : ''}Dashboard
                     </span>
                 </div>
                 {renderLinks()}
             </aside>
 
-            {/* Mobile Drawer (Hamburger) */}
-            <div className="md:hidden w-full flex items-center p-4 border-b border-gray-200 bg-[#F9F9F9]">
+            {/* Mobile Drawer (Hamburger) - Changed to lg:hidden, shrink-0, and top-aligned */}
+            <div className="lg:hidden shrink-0 flex items-start p-4 bg-transparent">
                 <Drawer>
-                    <Button variant="bordered" className="border-gray-300">
+                    <Button
+                        isIconOnly
+                        variant="bordered"
+                        className="border-gray-300 text-gray-700 bg-white shadow-sm"
+                        aria-label="Open navigation menu"
+                    >
                         <Bars />
-                        Menu
                     </Button>
                     <Drawer.Backdrop>
                         <Drawer.Content placement="left" className="bg-[#F9F9F9]">

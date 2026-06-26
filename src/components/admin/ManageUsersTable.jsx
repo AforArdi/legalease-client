@@ -133,8 +133,8 @@ export default function ManageUsersTable({ initialUsers, totalPages, currentPage
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <div className="w-full relative shadow-sm border border-gray-100 rounded-lg overflow-hidden">
-        <Table aria-label="Manage Users Table" className="bg-[#F3F5F2] min-h-[200px] min-w-full rounded-none">
+      <div className="w-full relative shadow-sm border border-gray-100 rounded-lg overflow-x-auto">
+        <Table aria-label="Manage Users Table" className="bg-[#F3F5F2] min-w-max md:min-w-full rounded-none">
           <Table.ScrollContainer>
             <Table.Content aria-label="All Users">
               <Table.Header>

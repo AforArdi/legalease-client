@@ -22,8 +22,8 @@ const AdminAnalytics = async () => {
     return (
         <div className="w-full">
             <div className="flex flex-col gap-2 mb-8">
-                <h1 className="text-3xl font-bold text-[#0A2519]">Platform Analytics</h1>
-                <p className="text-gray-600 text-sm">Overview of platform metrics and total revenue.</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0A2519]">Platform Analytics</h1>
+                <p className="text-gray-600 text-sm md:text-base">Overview of platform metrics and total revenue.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -36,7 +36,7 @@ const AdminAnalytics = async () => {
                         <UserCircle size={20} className="text-[#0A2519] opacity-70" />
                     </Card.Header>
                     <Card.Content className="px-6 pb-6">
-                        <Card.Title className="text-4xl font-bold text-[#0A2519]">
+                        <Card.Title className="text-3xl sm:text-4xl font-bold text-[#0A2519]">
                             {activeUsers}
                         </Card.Title>
                     </Card.Content>
@@ -51,7 +51,7 @@ const AdminAnalytics = async () => {
                         <Briefcase size={20} className="text-[#0A2519] opacity-70" />
                     </Card.Header>
                     <Card.Content className="px-6 pb-6">
-                        <Card.Title className="text-4xl font-bold text-[#0A2519]">
+                        <Card.Title className="text-3xl sm:text-4xl font-bold text-[#0A2519]">
                             {registeredLawyers}
                         </Card.Title>
                     </Card.Content>
@@ -66,7 +66,7 @@ const AdminAnalytics = async () => {
                         <Users size={20} className="text-[#0A2519] opacity-70" />
                     </Card.Header>
                     <Card.Content className="px-6 pb-6">
-                        <Card.Title className="text-4xl font-bold text-[#0A2519]">
+                        <Card.Title className="text-3xl sm:text-4xl font-bold text-[#0A2519]">
                             {totalHires}
                         </Card.Title>
                     </Card.Content>
@@ -81,7 +81,7 @@ const AdminAnalytics = async () => {
                         <DollarSign size={20} className="text-white opacity-70" />
                     </Card.Header>
                     <Card.Content className="px-6 pb-6">
-                        <Card.Title className="text-4xl font-bold text-white">
+                        <Card.Title className="text-3xl sm:text-4xl font-bold text-white">
                             ${totalRevenue.toLocaleString()}
                         </Card.Title>
                     </Card.Content>

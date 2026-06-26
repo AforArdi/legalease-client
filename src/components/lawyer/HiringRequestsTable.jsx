@@ -112,32 +112,28 @@ export default function HiringRequestsTable({ sessionUser }) {
         <div className="absolute top-0 left-0 bg-[#EAECE8] text-xs font-mono px-4 py-1.5 text-gray-500 rounded-br-lg z-10 border-b border-r border-white/50">
           LEDGER-409A
         </div>
+
         <Table
           aria-label="Hiring requests table"
-          classNames={{
-            wrapper: "bg-[#F3F5F2] p-0 shadow-none rounded-none pt-12 min-h-[200px]",
-            th: "bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6",
-            td: "px-6 py-4 border-b border-gray-200/60",
-            table: "min-w-full",
-          }}
+          className="bg-[#F3F5F2] p-0 shadow-none rounded-none pt-12 min-h-[200px] min-w-full"
         >
           <Table.ScrollContainer>
             <Table.Content>
               <Table.Header>
-                <Table.Column isRowHeader>CLIENT</Table.Column>
-                <Table.Column>DATE ISSUED</Table.Column>
-                <Table.Column>RETAINER FEE</Table.Column>
-                <Table.Column>STATUS</Table.Column>
-                <Table.Column>ACTIONS</Table.Column>
+                <Table.Column isRowHeader className="bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6">CLIENT</Table.Column>
+                <Table.Column className="bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6">DATE ISSUED</Table.Column>
+                <Table.Column className="bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6">RETAINER FEE</Table.Column>
+                <Table.Column className="bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6">STATUS</Table.Column>
+                <Table.Column className="bg-[#F3F5F2] text-gray-500 font-medium tracking-widest uppercase text-xs border-b border-gray-200 py-4 px-6">ACTIONS</Table.Column>
               </Table.Header>
               <Table.Body isLoading={isLoading} items={hiringRequests} emptyContent={isLoading ? "Loading..." : "No hiring requests found."}>
                 {(item) => (
                   <Table.Row key={item._id} className="hover:bg-white/40 transition-colors">
-                    <Table.Cell>{renderCell(item, "client")}</Table.Cell>
-                    <Table.Cell>{renderCell(item, "date")}</Table.Cell>
-                    <Table.Cell>{renderCell(item, "fee")}</Table.Cell>
-                    <Table.Cell>{renderCell(item, "status")}</Table.Cell>
-                    <Table.Cell>{renderCell(item, "actions")}</Table.Cell>
+                    <Table.Cell className="px-6 py-4 border-b border-gray-200/60">{renderCell(item, "client")}</Table.Cell>
+                    <Table.Cell className="px-6 py-4 border-b border-gray-200/60">{renderCell(item, "date")}</Table.Cell>
+                    <Table.Cell className="px-6 py-4 border-b border-gray-200/60">{renderCell(item, "fee")}</Table.Cell>
+                    <Table.Cell className="px-6 py-4 border-b border-gray-200/60">{renderCell(item, "status")}</Table.Cell>
+                    <Table.Cell className="px-6 py-4 border-b border-gray-200/60">{renderCell(item, "actions")}</Table.Cell>
                   </Table.Row>
                 )}
               </Table.Body>

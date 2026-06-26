@@ -18,8 +18,8 @@ export default function AdminOverviewPage() {
         <div className="flex flex-col gap-6 w-full max-w-6xl">
             {/* Page Header */}
             <div>
-                <h1 className="text-3xl font-bold text-[#0A2519]">Welcome back, Admin</h1>
-                <p className="text-gray-500 mt-1">Here is what is happening on LegalEase today.</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#0A2519]">Welcome back, Admin</h1>
+                <p className="text-gray-500 mt-1 text-sm md:text-base">Here is what is happening on LegalEase today.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
