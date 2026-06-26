@@ -9,10 +9,6 @@ import { getFreshUser } from "@/lib/api/core/getUserSession";
 import { Magnifier } from '@gravity-ui/icons';
 import { motion } from "framer-motion";
 
-const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/lawyers", label: "Browse Lawyers" },
-];
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,6 +31,12 @@ const Navbar = () => {
     }, [session?.user]);
 
     const user = dbUser || session?.user;
+
+    const navLinks = [
+        { href: "/", label: "Home" },
+        { href: "/lawyers", label: "Browse Lawyers" },
+        ...(user ? [{ href: `/dashboard/${user.role}`, label: "Dashboard" }] : []),
+    ];
 
     const handleSearchSubmit = (e) => {
         if (e.key === 'Enter') {
