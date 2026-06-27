@@ -4,7 +4,7 @@
   <p><strong>A modern, seamless platform bridging the gap between clients and legal professionals.</strong></p>
 
   <p>
-    <a href="https://legalease.vercel.app" target="_blank">View Live Demo</a>
+    <a href="https://client-legalease.vercel.app" target="_blank">View Live Demo</a>
     ·
     <a href="https://github.com/AforArdi/legalease-server" target="_blank">Backend Repository</a>
   </p>
