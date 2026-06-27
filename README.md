@@ -1,5 +1,4 @@
 <div align="center">
-  <img alt="LegalEase Logo" src="https://via.placeholder.com/150x150/0A2519/FFFFFF?text=LegalEase" width="120" />
   <h1>LegalEase</h1>
   <p><strong>A modern, seamless platform bridging the gap between clients and legal professionals.</strong></p>
 
